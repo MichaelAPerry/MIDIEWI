@@ -113,7 +113,7 @@ try {
                 $lastReport[$id] = $eventTime
                 $counter++
                 $report = Join-Path $PrivateDirectory ("descriptor-{0}-{1:D2}.txt" -f $PID,$counter)
-                Start-Process -FilePath $UsbTreeView -ArgumentList ('/R="' + $report + '"') 
+                Start-Process -FilePath $UsbTreeView -ArgumentList ('/R="' + $report + '"')
             }
         }
         if ($snapshotAfter -ge 0 -and $watch.Elapsed -ge $snapshotAfter) {
