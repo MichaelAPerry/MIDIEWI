@@ -7,3 +7,7 @@
 - [ ] Capture Bluetooth performance messages and run segmented takes for fingering, articulation and physical latency.
 - [ ] Verify OEM candidates against VID:PID, manufacturer string and board photographs.
 - [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
+- [x] Compare public Dream USB reference templates and analyze firmware containers offline.
+- [x] Test ordinary USB MIDI playback and the MIDI Universal Identity Request.
+- [ ] Map external controller effects, timbres, bank aliases and polyphony with isolated audio takes.
+- [ ] Obtain attributable firmware identification or a supported read-only protocol for this hardware revision.

@@ -42,3 +42,9 @@ Roland's Aerophone Pro establishes a commercial reference for onboard wind synth
 The WinMM reader opened the physical Windows MIDI input and captured a real performance. The capture summarizer reproduced the published counts. Linux USB descriptor decoding passed synthetic normal and malformed descriptor checks. Node checks exercised the lab's MIDI decoder, frequency and gain math, five-event demo capture, and three-voice release with a simulated audio API.
 
 A headless Windows Edge run of the lab's synthetic demo finished with five captured messages. Browser Web MIDI permission and a live browser-to-instrument session remain unverified.
+
+## USB MIDI output and offline image inspection
+
+In Windows PowerShell 5.1, run `.\tools\windows-midi-probe.ps1` to list ports. Select the external USB MIDI port by index. `-Mode Suite -DryRun` prints the full fixed sequence without opening a MIDI device. Live modes include `Identity`, `Notes`, `Controls`, `Programs`, `Tones`, and `Suite`. Use the instrument speaker or headphones at a comfortable level. `Identity` and `Suite` require both `-InputIndex` and `-OutputIndex` of the same device.
+
+Run `python3 tools/dream-image-info.py PATH` against a local vendor reference image or synthetic fixture. The tool identifies observed SAM2DFU metadata, checks DFU suffix CRC, and recognizes possible Dream raw-image markers. CRC covers accidental corruption. Authenticity and compatibility require independent evidence.
