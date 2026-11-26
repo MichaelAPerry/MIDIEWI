@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIDIEWI Lab</title>
+<style>
+  :root { color-scheme: dark; color: #f1eddf; background: #17201f; font: 17px system-ui; }
+  body { max-width: 48rem; margin: 4rem auto; padding: 0 1.25rem; }
+  h1 { font: 3.2rem Georgia,serif; margin-bottom: .5rem; }
+  h2 { font-size: 1.1rem; }
+  section { border-top: 1px solid #4d6260; padding: 1rem 0; }
+  label { display: inline-block; margin: .4rem .8rem .4rem 0; }
+  button, input, select { font: inherit; padding: .35rem; }
+  button { cursor: pointer; }
+  pre { overflow: auto; min-height: 12rem; background: #101817; padding: 1rem; }
+</style>
+<h1>MIDIEWI Lab</h1>
+<p>Capture wind-controller MIDI and audition a breath-shaped microtonal chord.</p>
+<section aria-label="Capture controls">
+  <button id="connect">Enable MIDI input</button>
+  <label>Input <select id="ports"><option value="">Select an input</option></select></label>
+  <p id="status" role="status">Local demo available without a MIDI device.</p>
+  <label>Exercise <select id="exercise">
+    <option>Hold one fingering and ramp breath</option>
+    <option>Alternate fingerings in one breath</option>
+    <option>Tongue short notes on one fingering</option>
+    <option>Change fingering without blowing</option>
+  </select></label>
+  <button id="record">Start capture</button>
+  <button id="save" disabled>Export JSON</button>
+</section>
+<section aria-label="Synthesis controls">
+  <button id="audio">Enable audio</button>
+  <button id="demo">Play demo</button>
+  <label>Breath CC <input id="cc" type="number" min="0" max="127" value="7"></label>
+  <label>Breath curve <input id="curve" type="range" min=".3" max="3" step=".1" value="1.4"></label>
+  <label>Tuning <select id="tuning"><option value="12">12 equal divisions</option><option value="19">19 equal divisions</option></select></label>
+  <label>Voicing <select id="chord"><option value="single">Single voice</option><option value="chord">Triad</option></select></label>
+</section>
+<section>
+  <h2>Recent MIDI messages</h2>
+  <pre id="log">Waiting for MIDI.</pre>
+</section>
+<script type="module" src="./lab.mjs"></script>
+</html>

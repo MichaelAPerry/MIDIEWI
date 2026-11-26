@@ -40,4 +40,8 @@ Sanitized excerpt with driver timestamps in milliseconds since input start and M
 3945 90 3D 78
 ```
 
-The stream demonstrates continuous control via CC7 and fixed attack velocity in this run. The two closely spaced off/on pairs show how the unit encoded some note transitions. Driver timestamp spacing measures received event cadence. End-to-end latency requires an independent physical reference. The sample leaves alternate modes, idle fingering, Bluetooth behavior, and exact USB transport descriptors open.
+The stream demonstrates continuous control via CC7 and fixed attack velocity in this run. The two closely spaced off/on pairs show how the unit encoded some note transitions. Driver timestamp spacing measures received event cadence. End-to-end latency requires an independent physical reference. This played sample leaves alternate modes, idle fingering and Bluetooth message behavior open.
+
+## Full descriptor readback
+
+USB Device Tree Viewer was downloaded from its publisher and run in portable report mode. The first direct WSL invocation failed because the extracted executable lacked the execute bit. After setting it, the Windows diagnostic produced the report. The [hardware fingerprint](../hardware/README.md) retains selected numeric fields and product-level strings. The raw host-wide report is outside version control.

@@ -1,7 +1,8 @@
 # Research roadmap
 
-1. Publish the public research notebook and original-code license.
-2. Enumerate USB on Linux and Windows as available. Record class descriptors and validate MIDI input.
-3. Compare candidate OEM devices and inspect board markings. Establish the processor, wireless implementation, and evidence for recovery.
-4. Characterize expression, fingering, articulation, and timing using repeatable performance exercises.
-5. Prototype host-side transformations. Revisit onboard development when the architecture and a recovery path are established.
+- [x] Publish the public research notebook and original-code license.
+- [x] Isolate and describe the Windows USB-MIDI device. Capture and summarize a live performance.
+- [x] Prototype host-side capture, breath shaping and microtonal harmony.
+- [ ] Characterize Bluetooth and run segmented takes for fingering, articulation and physical latency.
+- [ ] Verify OEM candidates against VID:PID, manufacturer string and board photographs.
+- [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
