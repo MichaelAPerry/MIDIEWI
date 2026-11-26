@@ -50,3 +50,17 @@ In Windows PowerShell 5.1, run `.\tools\windows-midi-probe.ps1` to list ports. S
 Run `python3 tools/dream-image-info.py PATH` against a local vendor reference image or synthetic fixture. The tool identifies observed SAM2DFU metadata, checks DFU suffix CRC, and recognizes possible Dream raw-image markers. CRC covers accidental corruption. Authenticity and compatibility require independent evidence.
 
 For line recordings, the probe's `-Timestamp` option emits Unix millisecond send markers on short messages. Capture the interface input in a separate process and align the event offsets to the first audible onset. With NumPy installed, run `python3 tools/audio-window.py captures/ewi.wav --start 11.74 --duration 0.2 --channel 1 --midi-notes 60 61` to report level, clip count and spectral peaks. Use isolated recording windows when comparing effects.
+
+## Windows USB startup and BLE GATT
+
+From Windows PowerShell 5.1, run the guide before touching the instrument:
+
+```powershell
+.\tools\windows-usb-watch.ps1 -Trial CableFirst -Seconds 90 -HostTrace -PrivateDirectory .\private\usb-startup
+.\tools\windows-usb-trace-summary.ps1 -Trace .\private\usb-startup\MIDIEWI-PID.etl
+.\tools\windows-ble.ps1 -Seconds 15 -Gatt
+```
+
+Select the actual ETL file written by the watcher. Other guided trials are `PowerFirst` and `PowerCycle`. `Observe` records an externally documented action without supplying a key sequence. Configuration Manager timestamps signal interface arrival/removal. The optional USBHUB3 ETW trace includes earlier enumeration stages and configuration bytes. The summary redacts Windows paths, raw instance identifiers and port topology. `-UsbTreeView PATH` adds host-wide raw reports alongside the private ETL, independent of its numeric descriptor parser. Keep these raw artifacts and any firmware images local. Without ETW, a brief interface that arrives and disappears before descriptor collection may have an interface event only.
+
+The BLE flag uses uncached metadata discovery when exactly one advertiser combines the MIDI EWI local name and BLE-MIDI UUID. It neither pairs nor reads or changes characteristic values.

@@ -11,4 +11,5 @@
 - [x] Test ordinary USB MIDI playback and the MIDI Universal Identity Request.
 - [x] Measure external controls, default-bank programs, two alternate bank selections and a 12-note polyphony lower bound.
 - [ ] Compare physical presets with external programs and test independent MIDI-channel timbres and the voice limit.
-- [ ] Obtain attributable firmware identification or a supported read-only protocol for this hardware revision.
+- [x] Monitor Windows USB startup across three arrangements. Enumerate normal-mode BLE GATT and check DFU listings.
+- [ ] Identify a revision-matched service procedure or a documented firmware identification/readback interface.
