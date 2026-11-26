@@ -1,10 +1,13 @@
 param(
-    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Suite')][string]$Mode = 'List',
+    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Synthesis','ChannelMap','Retention','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset','Suite')][string]$Mode = 'List',
     [ValidateRange(-1, 65535)][int]$OutputIndex = -1,
     [ValidateRange(-1, 65535)][int]$InputIndex = -1,
     [switch]$DryRun,
     [switch]$Timestamp,
-    [ValidateRange(1, 100)][int]$PolyphonyLevel = 32
+    [ValidateRange(1, 100)][int]$PolyphonyLevel = 32,
+    [ValidateRange(0, 9)][int]$TestProgram = 0,
+    [ValidateRange(0, 127)][int]$PhysicalVolume = 100,
+    [string]$PresetPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -157,6 +160,20 @@ if ($Mode -eq 'List') {
     return
 }
 
+if ($Mode -eq 'ApplyPreset') {
+    if (!$PresetPath) { throw 'Select a preset JSON file.' }
+    $preset = Get-Content -Raw -LiteralPath $PresetPath | ConvertFrom-Json
+    foreach ($name in 'program','volume','expression','modulation','reverb','bend_semitones') {
+        $field = $preset.PSObject.Properties[$name]
+        $upper = if ($name -eq 'program') {9} elseif ($name -eq 'bend_semitones') {12} else {127}
+        $lower = if ($name -eq 'bend_semitones') {2} else {0}
+        if (!$field -or $field.Value -isnot [int] -or $field.Value -lt $lower -or $field.Value -gt $upper) {
+            throw "Invalid preset field '$name'. Expected an integer in $lower..$upper."
+        }
+    }
+    if ($preset.bend_semitones -notin 2,12) { throw 'Measured bend ranges are 2 and 12 semitones.' }
+}
+
 if (!$DryRun) {
     if ($OutputIndex -lt 0) { throw 'Select an explicit output index from List.' }
     if ($Mode -in @('Identity', 'Suite') -and $InputIndex -lt 0) { throw 'Select the matching input index.' }
@@ -193,7 +210,142 @@ function Note([int]$number, [int]$duration = 450) {
     Pause 180
 }
 
+function Set-Rpn([int]$number, [int]$msb, [int]$lsb = 0) {
+    Send-Short 0xb0 101 0
+    Send-Short 0xb0 100 $number
+    Send-Short 0xb0 6 $msb
+    Send-Short 0xb0 38 $lsb
+    Send-Short 0xb0 101 127
+    Send-Short 0xb0 100 127
+}
+
+function Mark([string]$label) {
+    'MARK {0} {1}' -f [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(), $label
+}
+
+function Test-Voice([string]$label, [int]$channel = 1, [int]$pitch = 60, [int]$duration = 420) {
+    Mark $label
+    Send-Short (0x90 + $channel - 1) $pitch 90
+    Pause $duration
+    Mark ($label + '_off')
+    Send-Short (0x80 + $channel - 1) $pitch 0
+    Pause 240
+}
+
 try {
+    if ($Mode -eq 'ApplyPreset') {
+        Send-Short 0xc0 $preset.program
+        Send-Short 0xb0 7 $preset.volume
+        Send-Short 0xb0 11 $preset.expression
+        Send-Short 0xb0 1 $preset.modulation
+        Send-Short 0xb0 91 $preset.reverb
+        Set-Rpn 0 $preset.bend_semitones
+        return
+    }
+    if ($Mode -eq 'PhysicalState') {
+        Send-Short 0xb0 7 $PhysicalVolume
+        return
+    }
+    if ($Mode -eq 'PhysicalCheck') {
+        Test-Voice 'state_check'
+        return
+    }
+    if ($Mode -eq 'PhysicalRamp') {
+        Send-Short 0xb0 7 100
+        Pause 3500
+        foreach ($step in 0..3) {
+            $value = @(32,100,32,100)[$step]
+            Mark "physical_volume_${step}_$value"
+            Send-Short 0xb0 7 $value
+            Pause 2200
+        }
+        return
+    }
+    if ($Mode -eq 'Retention') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 85
+        Test-Voice 'sync' 1 60 650
+        Send-Short 0xb0 7 32
+        Test-Voice 'volume_first'
+        Test-Voice 'volume_second'
+        Send-Short 0xc0 0
+        Test-Voice 'volume_same_program'
+        Send-Short 0xc0 3
+        Test-Voice 'volume_other_program'
+        Send-Short 0xc0 0
+        Test-Voice 'volume_back'
+        Send-Short 0xb0 7 85
+        Test-Voice 'volume_restore'
+    }
+    if ($Mode -eq 'Synthesis') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 65
+        Send-Short 0xb0 11 127
+        Send-Short 0xb0 64 0
+        Send-Short 0xe0 0 64
+        Test-Voice 'sync' 1 60 650
+        foreach ($id in 1,5,10,65,71,72,73,74,75,76,77,78,91,93) {
+            $neutral = if ($id -in 10,71,72,73,74,75,76,77,78) {64} else {0}
+            foreach ($value in 0,64,127) {
+                Send-Short 0xc0 $TestProgram
+                if ($id -eq 5) { Send-Short 0xb0 65 127 }
+                Send-Short 0xb0 $id $value
+                $tag = "p${TestProgram}_cc${id}_v${value}"
+                if ($id -in 5,65) { Test-Voice ($tag + '_lead') 1 48 260 }
+                Test-Voice $tag
+                Send-Short 0xb0 $id $neutral
+                if ($id -eq 5) { Send-Short 0xb0 65 0 }
+            }
+        }
+        foreach ($number in 0,1,2) {
+            $values = switch ($number) { 0 { 2; 12 }; 1 { 64; 96 }; 2 { 64; 76 } }
+            foreach ($value in $values) {
+                Send-Short 0xc0 $TestProgram
+                Set-Rpn $number $value
+                if ($number -eq 0) { Send-Short 0xe0 0 96 }
+                Test-Voice "p${TestProgram}_rpn${number}_v${value}"
+                Send-Short 0xe0 0 64
+            }
+            if ($number -eq 0) { Set-Rpn 0 2 } else { Set-Rpn $number 64 }
+        }
+        Send-Short 0xc0 0
+        Test-Voice 'end_sync'
+    }
+    if ($Mode -eq 'ChannelMap') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 40
+        Test-Voice 'sync' 1 60 650
+        foreach ($channel in 1..16) {
+            Send-Short (0xc0 + $channel - 1) 0
+            Send-Short (0xb0 + $channel - 1) 7 45
+            Test-Voice "channel_$channel" $channel
+        }
+        foreach ($pitch in 35..81) { Test-Voice "drum_$pitch" 10 $pitch 115 }
+        Send-Short 0xc0 0
+        Send-Short 0xc1 7
+        Test-Voice 'pair_ch1' 1 60
+        Test-Voice 'pair_ch2' 2 60
+        Send-Short 0xc0 7
+        Send-Short 0xc1 0
+        Test-Voice 'swap_ch1' 1 60
+        Test-Voice 'swap_ch2' 2 60
+        Send-Short 0x90 60 90
+        Send-Short 0x91 67 90
+        Mark 'overlap'
+        Pause 700
+        Send-Short 0x80 60 0
+        Send-Short 0x81 67 0
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 18
+        foreach ($pitch in 60..83) {
+            Send-Short 0x90 $pitch 72
+            Pause 55
+        }
+        Mark 'stack24'
+        Pause 850
+        foreach ($pitch in 60..83) { Send-Short 0x80 $pitch 0 }
+        Test-Voice 'end_sync'
+    }
     if ($Mode -in @('Identity', 'Suite')) {
         Step 'MIDI Universal Identity Request'
         if ($DryRun) { '  F0 7E 7F 06 01 F7' }
@@ -311,7 +463,13 @@ try {
 } finally {
     if (!$DryRun) {
         try {
-            if ($Mode -ne 'Identity') {
+            if ($Mode -in @('Synthesis','ChannelMap','Retention')) {
+                foreach ($channel in 0..15) {
+                    [MidiProbe]::Short($handle, (0xb0 + $channel), 123, 0)
+                    [MidiProbe]::Short($handle, (0xb0 + $channel), 7, 100)
+                }
+            }
+            if ($Mode -notin @('Identity','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset')) {
                 [MidiProbe]::Short($handle, 0xb0, 64, 0)
                 [MidiProbe]::Short($handle, 0xe0, 0, 64)
                 foreach ($n in 60,64,67) { [MidiProbe]::Short($handle, 0x80, $n, 0) }
