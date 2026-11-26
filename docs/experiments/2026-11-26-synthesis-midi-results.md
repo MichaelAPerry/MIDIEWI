@@ -32,3 +32,41 @@ Across subsequent incoming notes and a same-program reselect, a CC7 value of 32 
 - **Editor hardware test.** The same `ApplyPreset` path the Windows editor calls sent a program-0 baseline, a lower-volume patch with modulation on, and the original baseline. External C4 measured −13.67, −18.44 and −13.65 dBFS, respectively. Estimated pitch span was 2.8, 73.3 and 2.6 cents. The editor's UI and preset serialization also passed a Windows smoke run.
 
 The [machine-readable implementation chart](../findings/dc02-midi-implementation.json) includes the per-program measurements, tested data values, channel evidence and persistence fields.
+
+## Physical fingering and breath
+
+A Windows WinMM input listener waited for the first positive-velocity Note On from the physical instrument. The analog recorder was already running. A separately recorded USB C4 opened each capture to align host MIDI timestamps. The sustained physical note was C♯4 (MIDI note 61). MIDI output logs supplied timestamped incoming changes during the same held note.
+
+| Test during breath-held C♯4 | Before → after, four edges | Interpretation |
+| --- | --- | --- |
+| CC7 values 32 / 100 / 32 / 100 | −9.30 → −8.07, −11.90 → −12.40, −12.17 → −11.37, −15.15 → −13.54 dBFS | Changes follow breath variation within the recording, with no correct-direction step on either transition to 32. The same USB-side control changed USB-triggered level by over 17 dB in the retention check. |
+| RPN 0 = 12, pitch bend values 12288 / 8192 / 12288 / 8192 | 276.96 → 277.24, 276.64 → 276.86, 277.15 → 276.56, 277.62 → 276.77 Hz | No step approaching the six-semitone response measured on USB notes. |
+
+RMS and pitch windows were about 300 ms either side of each message, leaving a gap around the transition. These results show no detected effect of incoming CC7 and pitch bend on the tested local note. They leave the routing of other controllers unresolved. A first timed attempt recorded no physical note and was excluded.
+
+In the pitch-bend take, CC7 remained at 32 while physical notes were played. The isolated USB C4 measured −30.35 dBFS before and −30.37 dBFS afterward, both at 261.63 Hz. The post-playback timestamp was lost from the mixed-process log, so the after-note window was located in the WAV by its isolated C4 attack and pitch. No CC7 message was sent between those two reference notes. This supports retention of USB-side CC7 through the local playing.
+
+## Battery disconnect and power cycle
+
+The operator left the audio path unchanged. In the battery run the USB MIDI output disappeared and reappeared during a reported cable disconnect with the unit left powered. Windows reassigned the output index from 1 to 2. In the power-cycle run the operator turned the instrument off and back on with USB attached. In each case the first post-transition message was a C4 Note On, with no CC or Program Change beforehand.
+
+| Transition | CC7=85 reference | CC7=32 before | First note after | CC7=85 reapplied |
+| --- | ---: | ---: | ---: | ---: |
+| USB unplugged on battery and reconnected | −13.61 | −31.03 | −30.97 | −13.61 |
+| Power off/on with USB connected | −13.61 | −31.00 | −10.84 | −13.67 |
+
+All levels are in dBFS. The first post-power-cycle C4 kept the program-0 spectral shape. The low CC7 state survived battery USB disconnect and reconnect, and was lost at power cycle. The test compared incoming USB notes before and after each transition. It did not infer internal state from audio during the disconnected interval.
+
+## Additional retention and physical-modulation checks
+
+The `PatchRetention` mode applied a parameter once, played two C4 notes, changed from program 0 to 3, then reselected 0. It played one program-0 neutral reference after explicitly restoring the control. The active setting carried through the repeated USB notes and both program changes at the tested values.
+
+| Parameter | First / second, program 0 | Program 3 | Back to program 0 | Restored reference |
+| --- | --- | --- | --- | --- |
+| CC1=127 pitch variation (cents) | 74.9 / 73.4 | 89.7 | 74.7 | 1.8 |
+| CC11=32 level (dBFS) | −42.63 / −42.55 | −45.78 | −42.57 | −18.41 |
+| CC77=127 pitch variation (cents) | 31.1 / 34.1 | 38.3 | 30.8 | 1.7 |
+| CC91=127 release (ms) | ≥189.6 / ≥189.6 | ≥189.6 | ≥189.6 | 49.9 |
+| RPN 0=12 at bend 12288 (Hz) | 370.007 / 370.008 | 369.606 | 370.008 | 277.194 |
+
+In a separate note-triggered physical D4 (MIDI 62), CC1 was switched 127→0→127→0. The detected pitch spans in the four ~1 s windows were 22.4, 22.6, 22.3 and 22.3 cents. The modulation waveform already present on the local note continued with the same depth across the changes. USB-triggered notes on the tested patches showed a 67–86 cent span at CC1=127. There was no detected effect of incoming CC1 on this local note. Additional parameters and host-side transitions remain scoped in the implementation chart.

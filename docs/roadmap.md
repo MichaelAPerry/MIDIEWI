@@ -22,4 +22,4 @@
 
 - [x] Measure standard synthesis CC/RPN responses, channel allocation and a 24-note stack.
 - [x] Publish the MIDI implementation chart and USB hardware patch editor.
-- [ ] Measure whether MIDI patch controls affect breath-played notes and survive cable removal or power cycling.
+- [x] Test CC7, CC1 and pitch bend on breath-played notes and measure USB-side CC7 retention through physical playing, cable removal and power cycling.

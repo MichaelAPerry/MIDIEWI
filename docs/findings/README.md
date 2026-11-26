@@ -26,3 +26,5 @@ The Vangoa U6 silkscreen and package dot establish a pin-numbering reference. Th
 Chinese trademark and patent records identify a Shenzhen electronic-instrument developer using the KALEZO brand. Its specific relationship to the instrument remains unverified. [OEM supply-chain research](../experiments/2026-11-26-chinese-oem-supply-chain.md)
 
 A KUYIN seller mentions a Kalezo companion app. Public catalog and archive checks have not identified its package or established a shared platform or new DC02 protocol. [App and platform investigation](../experiments/2026-11-26-kalezo-software-provenance.md)
+
+The original-style DC02 responds to standard MIDI modulation, vibrato, portamento, reverb and bend-range controls. The tested USB voice kept the newest 16 out of 24 held notes. CC7, CC1 and pitch bend produced no detected response on the tested breath-played notes. USB-side CC7 survived a battery reconnect and reset on power cycle. [MIDI implementation chart](dc02-midi-implementation.json) · [Measured results](../experiments/2026-11-26-synthesis-midi-results.md)

@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Synthesis','ChannelMap','Refine','ModShape','Retention','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset','Suite')][string]$Mode = 'List',
+    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Synthesis','ChannelMap','Refine','ModShape','Retention','PatchRetention','PhysicalRamp','PhysicalBend','PhysicalModulation','PhysicalState','PhysicalCheck','ApplyPreset','Suite')][string]$Mode = 'List',
     [ValidateRange(-1, 65535)][int]$OutputIndex = -1,
     [ValidateRange(-1, 65535)][int]$InputIndex = -1,
     [switch]$DryRun,
@@ -255,6 +255,24 @@ try {
         Test-Voice 'state_check'
         return
     }
+    if ($Mode -eq 'PhysicalModulation') {
+        try {
+            foreach ($value in 127,0,127,0) {
+                Send-Short 0xb0 1 $value
+                Pause 1700
+            }
+        } finally { Send-Short 0xb0 1 0 }
+        return
+    }
+    if ($Mode -eq 'PhysicalBend') {
+        Set-Rpn 0 12
+        foreach ($value in 96,64,96,64) {
+            Send-Short 0xe0 0 $value
+            Pause 1700
+        }
+        Set-Rpn 0 2
+        return
+    }
     if ($Mode -eq 'PhysicalRamp') {
         Send-Short 0xb0 7 100
         Test-Voice 'sync' 1 60 320
@@ -310,6 +328,36 @@ try {
             Send-Short 0xb0 77 64
         }
         Send-Short 0xc0 0
+    }
+    if ($Mode -eq 'PatchRetention') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 65
+        Test-Voice 'sync' 1 60 650
+        foreach ($id in 1,11,77,91,0) {
+            $active, $neutral = switch ($id) {
+                0 { 12; 2 }
+                11 { 32; 127 }
+                77 { 127; 64 }
+                default { 127; 0 }
+            }
+            Send-Short 0xc0 0
+            if ($id -eq 0) {
+                Set-Rpn 0 $active
+                Send-Short 0xe0 0 96
+            } else {
+                Send-Short 0xb0 $id $active
+            }
+            Test-Voice "keep${id}_first"
+            Test-Voice "keep${id}_second"
+            Send-Short 0xc0 3
+            Test-Voice "keep${id}_other"
+            Send-Short 0xc0 0
+            Test-Voice "keep${id}_back"
+            if ($id -eq 0) { Set-Rpn 0 $neutral } else { Send-Short 0xb0 $id $neutral }
+            Pause 1000
+            Test-Voice "keep${id}_restored"
+            Send-Short 0xe0 0 64
+        }
     }
     if ($Mode -eq 'Retention') {
         Send-Short 0xc0 0
@@ -513,13 +561,13 @@ try {
 } finally {
     if (!$DryRun) {
         try {
-            if ($Mode -in @('Synthesis','ChannelMap','Refine','ModShape','Retention')) {
+            if ($Mode -in @('Synthesis','ChannelMap','Refine','ModShape','Retention','PatchRetention')) {
                 foreach ($channel in 0..15) {
                     [MidiProbe]::Short($handle, (0xb0 + $channel), 123, 0)
                     [MidiProbe]::Short($handle, (0xb0 + $channel), 7, 100)
                 }
             }
-            if ($Mode -notin @('Identity','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset')) {
+            if ($Mode -notin @('Identity','PhysicalRamp','PhysicalBend','PhysicalModulation','PhysicalState','PhysicalCheck','ApplyPreset')) {
                 [MidiProbe]::Short($handle, 0xb0, 64, 0)
                 [MidiProbe]::Short($handle, 0xe0, 0, 64)
                 foreach ($n in 60,64,67) { [MidiProbe]::Short($handle, 0x80, $n, 0) }
