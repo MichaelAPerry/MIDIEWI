@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Synthesis','ChannelMap','Retention','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset','Suite')][string]$Mode = 'List',
+    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Synthesis','ChannelMap','Refine','ModShape','Retention','PhysicalRamp','PhysicalState','PhysicalCheck','ApplyPreset','Suite')][string]$Mode = 'List',
     [ValidateRange(-1, 65535)][int]$OutputIndex = -1,
     [ValidateRange(-1, 65535)][int]$InputIndex = -1,
     [switch]$DryRun,
@@ -163,9 +163,9 @@ if ($Mode -eq 'List') {
 if ($Mode -eq 'ApplyPreset') {
     if (!$PresetPath) { throw 'Select a preset JSON file.' }
     $preset = Get-Content -Raw -LiteralPath $PresetPath | ConvertFrom-Json
-    foreach ($name in 'program','volume','expression','modulation','reverb','bend_semitones') {
+    foreach ($name in 'program','volume','expression','modulation','vibrato_rate','vibrato_depth','vibrato_delay','reverb','portamento_time','portamento','bend_semitones') {
         $field = $preset.PSObject.Properties[$name]
-        $upper = if ($name -eq 'program') {9} elseif ($name -eq 'bend_semitones') {12} else {127}
+        $upper = if ($name -eq 'program') {9} elseif ($name -eq 'bend_semitones') {12} elseif ($name -eq 'portamento') {1} else {127}
         $lower = if ($name -eq 'bend_semitones') {2} else {0}
         if (!$field -or $field.Value -isnot [int] -or $field.Value -lt $lower -or $field.Value -gt $upper) {
             throw "Invalid preset field '$name'. Expected an integer in $lower..$upper."
@@ -238,7 +238,12 @@ try {
         Send-Short 0xb0 7 $preset.volume
         Send-Short 0xb0 11 $preset.expression
         Send-Short 0xb0 1 $preset.modulation
+        Send-Short 0xb0 76 $preset.vibrato_rate
+        Send-Short 0xb0 77 $preset.vibrato_depth
+        Send-Short 0xb0 78 $preset.vibrato_delay
         Send-Short 0xb0 91 $preset.reverb
+        Send-Short 0xb0 5 $preset.portamento_time
+        Send-Short 0xb0 65 ($preset.portamento * 127)
         Set-Rpn 0 $preset.bend_semitones
         return
     }
@@ -252,7 +257,8 @@ try {
     }
     if ($Mode -eq 'PhysicalRamp') {
         Send-Short 0xb0 7 100
-        Pause 3500
+        Test-Voice 'sync' 1 60 320
+        Pause 5000
         foreach ($step in 0..3) {
             $value = @(32,100,32,100)[$step]
             Mark "physical_volume_${step}_$value"
@@ -260,6 +266,50 @@ try {
             Pause 2200
         }
         return
+    }
+    if ($Mode -eq 'Refine') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 65
+        Test-Voice 'sync' 1 60 650
+        foreach ($program in 0,3,7) {
+            Send-Short 0xc0 $program
+            Send-Short 0xb0 5 64
+            foreach ($step in 0..2) {
+                $value = @(0,127,0)[$step]
+                Send-Short 0xb0 65 $value
+                Test-Voice "ref${program}_porta${step}_lead" 1 48 260
+                Test-Voice "ref${program}_porta${step}" 1 60 650
+            }
+            Send-Short 0xb0 5 0
+            foreach ($id in 93,77) {
+                foreach ($value in 127,0,64) {
+                    Pause 550
+                    Send-Short 0xb0 $id $value
+                    Test-Voice "ref${program}_cc${id}_v${value}" 1 60 760
+                }
+                Send-Short 0xb0 $id $(if ($id -eq 77) {64} else {0})
+            }
+        }
+        Send-Short 0xc0 0
+        Test-Voice 'end_sync'
+    }
+    if ($Mode -eq 'ModShape') {
+        Send-Short 0xc0 0
+        Send-Short 0xb0 7 65
+        Test-Voice 'sync' 1 60 650
+        foreach ($program in 0,3,7) {
+            Send-Short 0xc0 $program
+            Send-Short 0xb0 77 127
+            foreach ($id in 76,78) {
+                foreach ($value in 0,64,127) {
+                    Send-Short 0xb0 $id $value
+                    Test-Voice "shape${program}_cc${id}_v${value}" 1 60 760
+                }
+                Send-Short 0xb0 $id 64
+            }
+            Send-Short 0xb0 77 64
+        }
+        Send-Short 0xc0 0
     }
     if ($Mode -eq 'Retention') {
         Send-Short 0xc0 0
@@ -463,7 +513,7 @@ try {
 } finally {
     if (!$DryRun) {
         try {
-            if ($Mode -in @('Synthesis','ChannelMap','Retention')) {
+            if ($Mode -in @('Synthesis','ChannelMap','Refine','ModShape','Retention')) {
                 foreach ($channel in 0..15) {
                     [MidiProbe]::Short($handle, (0xb0 + $channel), 123, 0)
                     [MidiProbe]::Short($handle, (0xb0 + $channel), 7, 100)

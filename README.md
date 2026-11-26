@@ -16,3 +16,7 @@ This project is experimental. The operator identifies the sample as an original-
 - [Contributing](CONTRIBUTING.md)
 
 Original project code is available under the [MIT License](LICENSE).
+
+### DC02 synthesis controls
+
+USB captures verify modulation, vibrato depth/rate/delay, portamento, reverb send and configurable pitch-bend range. The tested patch held the newest 16 notes in a 24-note stack. External channels 1 and 2 can play distinct timbres together. [Hardware patch editor](docs/development/dc02-patch-editor.md) · [MIDI implementation chart](docs/findings/dc02-midi-implementation.json) · [Measured results](docs/experiments/2026-11-26-synthesis-midi-results.md)

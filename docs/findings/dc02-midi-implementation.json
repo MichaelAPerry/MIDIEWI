@@ -1,0 +1,1911 @@
+{
+  "schema_version": 1,
+  "device": {
+    "description": "original-style Konix DC02, one tested unit",
+    "vid": "2485",
+    "pid": "4330",
+    "manufacturer": "Kalezo",
+    "product": "USB MIDI",
+    "firmware_version": null,
+    "transport": "USB-MIDI 1.0"
+  },
+  "scope": {
+    "program_numbers": "zero_based",
+    "channels": "one_based",
+    "midi_parameter_values": "decimal",
+    "measurement": "PreSonus Studio 68c analog capture, effects on USB-triggered notes unless stated",
+    "notes": "No detected effect is conditional on the tested patch, values and message sequence."
+  },
+  "channels": {
+    "notes_sounded": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "independent_program_channels": [
+      1,
+      2
+    ],
+    "simultaneous_distinct_timbres": 2,
+    "channel_10": {
+      "notes_tested_inclusive": [
+        35,
+        81
+      ],
+      "status": "no_detected_effect",
+      "peak_trial_rms_dbfs": -58.46
+    }
+  },
+  "polyphony": {
+    "program": 0,
+    "channel": 1,
+    "held_notes": 24,
+    "detected_voices": 16,
+    "surviving_midi_notes_inclusive": [
+      68,
+      83
+    ],
+    "evidence": "oldest notes disappeared",
+    "scope": "Single patch and channel. Cross-channel voice pool unmeasured."
+  },
+  "program_change": {
+    "channel": 1,
+    "bank_msb_lsb": [
+      0,
+      0
+    ],
+    "sounding_values_inclusive": [
+      0,
+      9
+    ],
+    "values_tested_inclusive": [
+      0,
+      127
+    ]
+  },
+  "cc": {
+    "1": {
+      "name": "modulation",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Increases cyclic pitch variation with the controller value.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.27,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.4
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.54,
+            "spectral_centroid_hz": 268.7,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.7,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 40.0
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.54,
+            "spectral_centroid_hz": 267.08,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -25.57,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 76.3
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.64,
+            "spectral_centroid_hz": 542.01,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.11,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.7,
+            "spectral_centroid_hz": 546.9,
+            "attack_to_80_ms": 29.9,
+            "tail_dbfs": -30.54,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 49.8
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.68,
+            "spectral_centroid_hz": 552.45,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.96,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 86.1
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.22,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.89,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 2.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 749.67,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.4,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 31.4
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 752.09,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.57,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 67.1
+          }
+        }
+      }
+    },
+    "5": {
+      "name": "portamento_time",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Controls glide with CC65 on and preceding C3.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.45,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -27.01,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.3
+          },
+          "64": {
+            "rms_dbfs_input_1": -19.19,
+            "spectral_centroid_hz": 183.57,
+            "attack_to_80_ms": 144.7,
+            "tail_dbfs": -26.81,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 652.0
+          },
+          "127": {
+            "rms_dbfs_input_1": -19.4,
+            "spectral_centroid_hz": 135.8,
+            "attack_to_80_ms": 169.6,
+            "tail_dbfs": -26.52,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 1033.9
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.64,
+            "spectral_centroid_hz": 541.65,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.02,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.2
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.92,
+            "spectral_centroid_hz": 371.09,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -31.97,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 1788.2
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.93,
+            "spectral_centroid_hz": 273.06,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -32.03,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 10.9
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.4,
+            "spectral_centroid_hz": 755.09,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.5,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 510.43,
+            "attack_to_80_ms": 69.8,
+            "tail_dbfs": -30.25,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 1801.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.76,
+            "spectral_centroid_hz": 376.03,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -30.66,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 50.2
+          }
+        }
+      }
+    },
+    "10": {
+      "name": "pan",
+      "status": "effect_detected",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Both recorded inputs decreased about 3 dB at either endpoint. Stereo placement is unverified.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -21.53,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -29.9,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 3.0
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.51,
+            "spectral_centroid_hz": 270.23,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -26.1,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.9
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.49,
+            "spectral_centroid_hz": 270.21,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -29.03,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 3.0
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -24.7,
+            "spectral_centroid_hz": 541.84,
+            "attack_to_80_ms": 29.9,
+            "tail_dbfs": -33.79,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.68,
+            "spectral_centroid_hz": 540.97,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.41,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 6.5
+          },
+          "127": {
+            "rms_dbfs_input_1": -24.67,
+            "spectral_centroid_hz": 540.86,
+            "attack_to_80_ms": 29.9,
+            "tail_dbfs": -33.92,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 4.5
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -24.5,
+            "spectral_centroid_hz": 755.06,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -32.38,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 4.1
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.48,
+            "spectral_centroid_hz": 755.1,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.56,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 4.3
+          },
+          "127": {
+            "rms_dbfs_input_1": -24.46,
+            "spectral_centroid_hz": 755.17,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -32.22,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.8
+          }
+        }
+      }
+    },
+    "65": {
+      "name": "portamento_switch",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "CC65 0/127/0 at CC5=64 toggled off/on/off on each program.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.45,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -26.69,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.1
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.22,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.64,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.2
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.45,
+            "spectral_centroid_hz": 270.22,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.68,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.2
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.64,
+            "spectral_centroid_hz": 541.97,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.11,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.5
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.63,
+            "spectral_centroid_hz": 541.62,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.55,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.9
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.63,
+            "spectral_centroid_hz": 540.97,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.3,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 4.7
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.46,
+            "spectral_centroid_hz": 755.11,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.98,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.5
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.12,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.75,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.4
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.13,
+            "attack_to_80_ms": 44.9,
+            "tail_dbfs": -30.85,
+            "release_above_minus20_ms_capped": 39.9,
+            "pitch_span_cents": 2.1
+          }
+        }
+      },
+      "isolated_confirmation_values": [
+        0,
+        127,
+        0
+      ]
+    },
+    "71": {
+      "name": "resonance",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "No repeatable spectral response.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.5,
+            "spectral_centroid_hz": 270.27,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.13,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.22,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -26.17,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.49,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.56,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.7
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.68,
+            "spectral_centroid_hz": 541.07,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.97,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 6.1
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 541.49,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.57,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.8
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 541.34,
+            "attack_to_80_ms": 29.9,
+            "tail_dbfs": -31.15,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 6.9
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.08,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -31.4,
+            "release_above_minus20_ms_capped": 39.9,
+            "pitch_span_cents": 2.3
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.16,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.29,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.47,
+            "spectral_centroid_hz": 755.07,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.26,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.7
+          }
+        }
+      }
+    },
+    "72": {
+      "name": "release",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "No repeatable envelope response.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.49,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.31,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.23,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.62,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.49,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.05,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.7
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.68,
+            "spectral_centroid_hz": 541.56,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.79,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 541.39,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.82,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 6.9
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 541.22,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.91,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 6.5
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 755.22,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.65,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.9
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.46,
+            "spectral_centroid_hz": 755.16,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.04,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.42,
+            "spectral_centroid_hz": 755.14,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.61,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.3
+          }
+        }
+      }
+    },
+    "73": {
+      "name": "attack",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "No repeatable envelope response.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.5,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.77,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -26.53,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.49,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.98,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 2.7
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 540.74,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.34,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.5
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 540.96,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.81,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 4.8
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 540.97,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.61,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.7
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.15,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.77,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.9
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.12,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.15,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.1,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -30.21,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.1
+          }
+        }
+      }
+    },
+    "74": {
+      "name": "brightness",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "No repeatable spectral response.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.51,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -27.34,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.49,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.7,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.05,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 541.21,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.49,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 7.0
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 540.92,
+            "attack_to_80_ms": 29.9,
+            "tail_dbfs": -30.78,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.1
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 540.63,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.35,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.5
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.42,
+            "spectral_centroid_hz": 755.14,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.3,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.4
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.46,
+            "spectral_centroid_hz": 755.02,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.52,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.0
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.41,
+            "spectral_centroid_hz": 755.12,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.76,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.4
+          }
+        }
+      }
+    },
+    "75": {
+      "name": "decay",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "No repeatable envelope or level response.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.51,
+            "spectral_centroid_hz": 270.21,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.22,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.23,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -26.04,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 2.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -26.35,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 540.81,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.9,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.6
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 541.32,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.13,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 6.9
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 540.97,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.73,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.4
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.42,
+            "spectral_centroid_hz": 755.17,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -30.75,
+            "release_above_minus20_ms_capped": 39.9,
+            "pitch_span_cents": 3.3
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.17,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.99,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.3
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 755.19,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -31.5,
+            "release_above_minus20_ms_capped": 39.9,
+            "pitch_span_cents": 3.2
+          }
+        }
+      }
+    },
+    "76": {
+      "name": "vibrato_rate",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "With CC77=127, CC76 changes the oscillation pattern across all three tested programs.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.21,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -26.04,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 2.6
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.23,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -27.63,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.5
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -26.35,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.67,
+            "spectral_centroid_hz": 542.11,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.96,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.0
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 541.15,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.53,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 6.2
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 541.5,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.19,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.1
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.22,
+            "attack_to_80_ms": 54.9,
+            "tail_dbfs": -29.34,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.2
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 755.18,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.99,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.0
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.47,
+            "spectral_centroid_hz": 755.22,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.71,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 3.1
+          }
+        }
+      },
+      "with_cc77_at_127": {
+        "0": {
+          "0": [
+            8.31,
+            8.46,
+            11.07,
+            13.8,
+            16.5,
+            19.18,
+            21.88,
+            24.5,
+            27.17,
+            29.81,
+            32.64,
+            35.28,
+            37.85,
+            39.82,
+            39.92
+          ],
+          "64": [
+            1.65,
+            -8.38,
+            -3.19,
+            11.31,
+            7.16,
+            -13.15,
+            -14.47,
+            11.24,
+            21.38,
+            -8.37,
+            -29.45,
+            1.81,
+            34.46,
+            5.51
+          ],
+          "127": [
+            2.54,
+            -3.0,
+            0.63,
+            3.25,
+            -3.9,
+            -3.31,
+            6.52,
+            0.03,
+            -8.78,
+            4.31,
+            7.32,
+            -9.09,
+            -4.11,
+            11.48,
+            -1.96
+          ]
+        },
+        "3": {
+          "0": [
+            6.87,
+            10.12,
+            13.38,
+            16.65,
+            19.94,
+            23.3,
+            26.54,
+            29.84,
+            33.17,
+            36.49,
+            39.7,
+            43.09,
+            46.29,
+            49.04
+          ],
+          "64": [
+            -8.62,
+            -2.96,
+            13.3,
+            9.85,
+            -16.1,
+            -20.53,
+            12.08,
+            30.19,
+            -3.46,
+            -39.01,
+            -11.72,
+            40.53,
+            28.17,
+            -36.02
+          ],
+          "127": [
+            1.25,
+            2.03,
+            -5.74,
+            1.5,
+            5.98,
+            -8.05,
+            -1.75,
+            10.84,
+            -8.11,
+            -7.44,
+            15.03,
+            -3.94,
+            -14.63,
+            16.74,
+            3.34
+          ]
+        },
+        "7": {
+          "0": [
+            0.46,
+            4.55,
+            6.1,
+            7.4,
+            8.78,
+            10.06,
+            11.44,
+            12.95,
+            14.49,
+            15.63,
+            17.06,
+            18.52,
+            19.96,
+            21.18
+          ],
+          "64": [
+            -0.14,
+            8.15,
+            0.01,
+            -13.08,
+            -4.69,
+            15.14,
+            11.97,
+            -13.42,
+            -21.63,
+            7.85,
+            30.12,
+            0.88,
+            -34.34,
+            -12.07
+          ],
+          "127": [
+            -0.57,
+            -2.87,
+            1.5,
+            3.19,
+            -5.21,
+            0.2,
+            7.16,
+            -6.43,
+            -3.01,
+            9.58,
+            -4.31,
+            -7.84,
+            11.2,
+            -0.64
+          ]
+        }
+      }
+    },
+    "77": {
+      "name": "vibrato_depth",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Value 127 increases cyclic pitch variation with CC1=0.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.24,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.93,
+            "release_above_minus20_ms_capped": 64.9,
+            "pitch_span_cents": 2.4
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.22,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.34,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.5
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.48,
+            "spectral_centroid_hz": 271.46,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.14,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 26.0
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 541.36,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -32.08,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 0.1
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 540.95,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -31.57,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.66,
+            "spectral_centroid_hz": 538.27,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -32.05,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 39.2
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.41,
+            "spectral_centroid_hz": 754.98,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.47,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 755.16,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.05,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 3.1
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.43,
+            "spectral_centroid_hz": 751.58,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -29.95,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 28.7
+          }
+        }
+      }
+    },
+    "78": {
+      "name": "vibrato_delay",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "With CC77=127, value 127 delayed observable vibrato beyond the measured held-note window.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -27.04,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.25,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.43,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.5
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.45,
+            "spectral_centroid_hz": 270.26,
+            "attack_to_80_ms": 79.8,
+            "tail_dbfs": -26.58,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.3
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 540.89,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -30.72,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 6.0
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 541.63,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -32.1,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 4.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 541.36,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.83,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 0.1
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.45,
+            "spectral_centroid_hz": 755.13,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.7,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.7
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.24,
+            "attack_to_80_ms": 44.9,
+            "tail_dbfs": -30.73,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.5
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.12,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.66,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.5
+          }
+        }
+      },
+      "with_cc77_at_127": {
+        "0": {
+          "0": [
+            5.24,
+            6.2,
+            -4.13,
+            -12.89,
+            1.69,
+            17.79,
+            1.44,
+            -22.41,
+            -8.32,
+            22.88,
+            15.67,
+            -22.15,
+            -26.12,
+            16.47
+          ],
+          "64": [
+            -3.85,
+            -0.04,
+            10.19,
+            2.09,
+            -14.65,
+            -8.1,
+            15.3,
+            14.2,
+            -14.44,
+            -22.98,
+            10.11,
+            30.54,
+            -4.74,
+            -37.29
+          ],
+          "127": [
+            2.2,
+            0.04,
+            0.05,
+            0.03,
+            0.03,
+            0.02,
+            0.02,
+            0.01,
+            0.03,
+            0.03,
+            0.03,
+            0.04,
+            0.03,
+            0.02,
+            0.01
+          ]
+        },
+        "3": {
+          "0": [
+            0.19,
+            -11.18,
+            -7.03,
+            13.97,
+            15.47,
+            -13.11,
+            -26.42,
+            5.9,
+            34.63,
+            6.17,
+            -39.49,
+            -22.8,
+            36.65,
+            39.2
+          ],
+          "64": [
+            -2.31,
+            10.02,
+            8.51,
+            -12.85,
+            -18.82,
+            8.95,
+            27.31,
+            -0.76,
+            -35.07,
+            -12.98,
+            36.41,
+            28.86,
+            -31.71,
+            -44.93
+          ],
+          "127": [
+            0.1,
+            0.04,
+            0.06,
+            0.05,
+            0.03,
+            0.02,
+            -0.0,
+            -0.0,
+            0.04,
+            0.02,
+            0.04,
+            0.05,
+            0.04,
+            0.01
+          ]
+        },
+        "7": {
+          "0": [
+            -4.47,
+            -7.73,
+            1.02,
+            13.14,
+            3.05,
+            -16.18,
+            -10.26,
+            15.07,
+            19.69,
+            -10.33,
+            -29.01,
+            2.46,
+            35.12,
+            8.93
+          ],
+          "64": [
+            -7.74,
+            -1.41,
+            9.8,
+            6.09,
+            -10.7,
+            -13.42,
+            8.31,
+            21.91,
+            -2.35,
+            -28.02,
+            -6.44,
+            29.37,
+            17.95,
+            -24.17
+          ],
+          "127": [
+            -1.24,
+            0.24,
+            0.29,
+            0.29,
+            0.32,
+            0.4,
+            0.33,
+            0.39,
+            0.41,
+            0.25,
+            0.32,
+            0.3,
+            0.38,
+            0.35
+          ]
+        }
+      }
+    },
+    "91": {
+      "name": "reverb_send",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Longer release tail with increased send.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -18.47,
+            "spectral_centroid_hz": 270.22,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.35,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.5
+          },
+          "64": {
+            "rms_dbfs_input_1": -19.3,
+            "spectral_centroid_hz": 276.75,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.06,
+            "release_above_minus20_ms_capped": 189.6,
+            "pitch_span_cents": 3.0
+          },
+          "127": {
+            "rms_dbfs_input_1": -20.05,
+            "spectral_centroid_hz": 288.3,
+            "attack_to_80_ms": 269.4,
+            "tail_dbfs": -21.97,
+            "release_above_minus20_ms_capped": 189.6,
+            "pitch_span_cents": 5.5
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.65,
+            "spectral_centroid_hz": 541.8,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -31.51,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.19,
+            "spectral_centroid_hz": 639.16,
+            "attack_to_80_ms": 34.9,
+            "tail_dbfs": -30.01,
+            "release_above_minus20_ms_capped": 189.6,
+            "pitch_span_cents": 4.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -20.45,
+            "spectral_centroid_hz": 686.99,
+            "attack_to_80_ms": 109.8,
+            "tail_dbfs": -26.7,
+            "release_above_minus20_ms_capped": 189.6,
+            "pitch_span_cents": 7.5
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.13,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.92,
+            "release_above_minus20_ms_capped": 39.9,
+            "pitch_span_cents": 2.8
+          },
+          "64": {
+            "rms_dbfs_input_1": -20.06,
+            "spectral_centroid_hz": 767.95,
+            "attack_to_80_ms": 89.8,
+            "tail_dbfs": -28.45,
+            "release_above_minus20_ms_capped": 184.6,
+            "pitch_span_cents": 5.8
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.66,
+            "spectral_centroid_hz": 775.54,
+            "attack_to_80_ms": 144.7,
+            "tail_dbfs": -25.82,
+            "release_above_minus20_ms_capped": 189.6,
+            "pitch_span_cents": 1204.9
+          }
+        }
+      }
+    },
+    "93": {
+      "name": "chorus_send",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        64,
+        127
+      ],
+      "effect": "Isolated repeat with reverb send off gave no repeatable change.",
+      "primary_sweep": {
+        "0": {
+          "0": {
+            "rms_dbfs_input_1": -17.66,
+            "spectral_centroid_hz": 268.84,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -25.5,
+            "release_above_minus20_ms_capped": 69.8,
+            "pitch_span_cents": 5.9
+          },
+          "64": {
+            "rms_dbfs_input_1": -18.42,
+            "spectral_centroid_hz": 270.15,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.71,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.6
+          },
+          "127": {
+            "rms_dbfs_input_1": -18.46,
+            "spectral_centroid_hz": 270.23,
+            "attack_to_80_ms": 84.8,
+            "tail_dbfs": -26.31,
+            "release_above_minus20_ms_capped": 59.9,
+            "pitch_span_cents": 2.4
+          }
+        },
+        "3": {
+          "0": {
+            "rms_dbfs_input_1": -21.69,
+            "spectral_centroid_hz": 577.97,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -31.87,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 5.2
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.63,
+            "spectral_centroid_hz": 540.79,
+            "attack_to_80_ms": 20.0,
+            "tail_dbfs": -32.09,
+            "release_above_minus20_ms_capped": 49.9,
+            "pitch_span_cents": 4.9
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.64,
+            "spectral_centroid_hz": 540.78,
+            "attack_to_80_ms": 24.9,
+            "tail_dbfs": -31.55,
+            "release_above_minus20_ms_capped": 54.9,
+            "pitch_span_cents": 5.4
+          }
+        },
+        "7": {
+          "0": {
+            "rms_dbfs_input_1": -21.26,
+            "spectral_centroid_hz": 761.68,
+            "attack_to_80_ms": 44.9,
+            "tail_dbfs": -30.51,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 4.4
+          },
+          "64": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 754.66,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.74,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.7
+          },
+          "127": {
+            "rms_dbfs_input_1": -21.44,
+            "spectral_centroid_hz": 755.19,
+            "attack_to_80_ms": 49.9,
+            "tail_dbfs": -30.38,
+            "release_above_minus20_ms_capped": 44.9,
+            "pitch_span_cents": 2.9
+          }
+        }
+      }
+    },
+    "0": {
+      "name": "bank_select_msb",
+      "status": "no_distinct_bank_detected",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        1
+      ],
+      "effect": "Tested with CC32 and program changes."
+    },
+    "2": {
+      "name": "breath",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        32,
+        100
+      ],
+      "effect": "No held-note level change."
+    },
+    "7": {
+      "name": "volume",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        32,
+        85,
+        100
+      ],
+      "effect": "At program 0, 32 versus 85 differed by approximately 17.4 dB."
+    },
+    "11": {
+      "name": "expression",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        32,
+        100
+      ],
+      "effect": "Program 0 held note rose approximately 20.5 dB."
+    },
+    "32": {
+      "name": "bank_select_lsb",
+      "status": "no_distinct_bank_detected",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        1
+      ],
+      "effect": "Programs 0\u20139 in banks 0/0, 0/1 and 1/0 were substantially equivalent."
+    },
+    "64": {
+      "name": "sustain",
+      "status": "supported",
+      "channel": 1,
+      "message_range": [
+        0,
+        127
+      ],
+      "tested_values": [
+        0,
+        127
+      ],
+      "effect": "Note remained audible after Note Off until pedal release."
+    }
+  },
+  "rpn": {
+    "0,0": {
+      "name": "pitch_bend_sensitivity",
+      "status": "supported",
+      "channel": 1,
+      "tested_data_msb": [
+        2,
+        12
+      ],
+      "tested_data_lsb": 0,
+      "pitch_hz_by_program": {
+        "0": [
+          277.193,
+          370.004
+        ],
+        "3": [
+          277.359,
+          370.062
+        ],
+        "7": [
+          277.248,
+          370.108
+        ]
+      }
+    },
+    "0,1": {
+      "name": "fine_tuning",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "tested_data_msb": [
+        64,
+        96
+      ],
+      "tested_data_lsb": 0,
+      "pitch_hz_by_program": {
+        "0": [
+          261.629,
+          261.63
+        ],
+        "3": [
+          261.802,
+          261.439
+        ],
+        "7": [
+          261.675,
+          261.677
+        ]
+      }
+    },
+    "0,2": {
+      "name": "coarse_tuning",
+      "status": "no_detected_effect",
+      "channel": 1,
+      "tested_data_msb": [
+        64,
+        76
+      ],
+      "tested_data_lsb": 0,
+      "pitch_hz_by_program": {
+        "0": [
+          261.63,
+          261.63
+        ],
+        "3": [
+          261.808,
+          261.79
+        ],
+        "7": [
+          261.678,
+          261.674
+        ]
+      }
+    }
+  },
+  "pitch_bend": {
+    "status": "supported",
+    "default_semitones": 2,
+    "center": 8192,
+    "tested_value": 12288
+  },
+  "persistence": {
+    "cc7_ch1": {
+      "subsequent_usb_note_on": true,
+      "same_and_other_usb_program_change": true,
+      "physical_playing": null,
+      "battery_usb_disconnect": null,
+      "power_cycle": null
+    },
+    "other_controls": "Persistence unmeasured."
+  },
+  "editor_controls": [
+    "program",
+    "volume",
+    "expression",
+    "modulation",
+    "vibrato_rate",
+    "vibrato_depth",
+    "vibrato_delay",
+    "reverb",
+    "portamento",
+    "portamento_time",
+    "bend_semitones"
+  ]
+}

@@ -56,7 +56,8 @@ def summarize(samples, release, rate, channel):
     cents = 1200 * np.log2(np.array(pitch_windows) / 261.625565)
     pitch = estimate_pitch(core, rate)
     harmonic = [spectrum[abs(frequencies - pitch * i) < 15].sum() for i in range(1, 13)]
-    harmonic /= max(sum(harmonic), 1e-20)
+    harmonic = np.asarray(harmonic)
+    harmonic /= max(harmonic.sum(), 1e-20)
     report.update({
         "pitch_hz": round(pitch, 3),
         "pitch_window_cents": [round(float(x), 2) for x in cents],
@@ -74,6 +75,7 @@ def main():
     parser.add_argument("wav", type=Path)
     parser.add_argument("log", type=Path)
     parser.add_argument("--sync", type=float, help="WAV time of sync attack, in seconds")
+    parser.add_argument("--allow-truncated", action="store_true", help="skip windows outside the recording")
     args = parser.parse_args()
     markers = {label: int(timestamp) for timestamp, label in
                re.findall(r"(?m)^MARK (\d+) (\w+)", args.log.read_text())}
@@ -92,10 +94,13 @@ def main():
         if not len(detected):
             parser.error("sync note absent. Provide --sync only if the first note is independently located")
         sync = detected[0] * width / rate
+    if "sync" not in markers:
+        parser.error("log does not contain a sync marker")
     anchor = markers["sync"]
     sync_audio = audio[int((sync + .1) * rate):int((sync + .4) * rate)]
     channel = int(np.argmax(rms(sync_audio)))
     records = {}
+    skipped = []
     for label, timestamp in markers.items():
         end = markers.get(label + "_off")
         if end is None:
@@ -105,7 +110,10 @@ def main():
         start_sample = int((sync + (timestamp - anchor) / 1000) * rate)
         end_sample = int((sync + (end - anchor) / 1000) * rate)
         if start_sample < 0 or end_sample + int(rate * .19) > len(audio):
-            parser.error(f"capture does not contain full {label} window")
+            if not args.allow_truncated:
+                parser.error(f"capture does not contain full {label} window")
+            skipped.append(label)
+            continue
         records[label] = summarize(audio[start_sample:end_sample],
                                    audio[end_sample:end_sample + int(rate * .19)],
                                    rate, channel)
@@ -113,16 +121,16 @@ def main():
             segment = audio[start_sample:end_sample, channel]
             magnitude = abs(np.fft.rfft(segment * np.hanning(len(segment))))
             freq = np.fft.rfftfreq(len(segment), 1 / rate)
-            reference = max(magnitude)
-            # Within one octave, these fundamentals cannot be harmonics of another played note.
-            notes = range(60, 72) if label == "stack24" else [60, 67]
+            reference = max(max(magnitude), 1e-12)
+            # Above the first octave, peaks may overlap harmonics of lower notes.
+            notes = range(60, 84) if label == "stack24" else [60, 67]
             relative = {}
             for note in notes:
                 target = 440 * 2 ** ((note - 69) / 12)
                 relative[note] = round(db(max(magnitude[abs(freq - target) < 4]) / reference), 2)
             records[label]["fundamental_db_relative_peak"] = relative
     print(json.dumps({"sync_seconds": round(sync, 3), "analysis_channel": channel + 1,
-                      "trials": records}, indent=2, allow_nan=False))
+                      "trials": records, "skipped": skipped}, indent=2, allow_nan=False))
 
 
 if __name__ == "__main__":

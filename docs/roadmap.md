@@ -19,3 +19,7 @@
 - [ ] Compare physical presets with external programs and test independent MIDI-channel timbres and the voice limit.
 - [x] Monitor Windows USB startup across three arrangements. Enumerate normal-mode BLE GATT and check DFU listings.
 - [ ] Identify a revision-matched service procedure or a documented firmware identification/readback interface.
+
+- [x] Measure standard synthesis CC/RPN responses, channel allocation and a 24-note stack.
+- [x] Publish the MIDI implementation chart and USB hardware patch editor.
+- [ ] Measure whether MIDI patch controls affect breath-played notes and survive cable removal or power cycling.
