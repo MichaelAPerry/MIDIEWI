@@ -13,3 +13,5 @@ The tested normal-mode USB configuration exposes Audio Control and MIDI Streamin
 ## Preservation path
 
 Use PCB photos to determine whether USB, audio and Bluetooth share a chip, and whether there is an external flash. Find the chip documentation and board revision before connecting probes. A vendor factory update and documented recovery path would establish what can be restored. If a confirmed chip and interface support reading with protection intact, establish correct signal voltage and avoid bus contention before considering a read. Repeat any permitted read and compare hashes privately. Retain a private copy of any calibration or settings regions needed for recovery. Persistent storage changes require explicit authorization. Generic DFU/updater packages and boot key sequences have not been tried on this unit.
+
+The [Dream ecosystem investigation](dream-ecosystem.md) compares descriptor templates, public update packages, tools and read-only identification paths. The [offline experiment](../experiments/2026-11-26-dream-reference-files.md) reproduces SAM2DFU container findings.
