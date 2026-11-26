@@ -14,3 +14,5 @@ Matching sources: 1
 The advertisement service UUID matched the BLE-MIDI profile. No pairing, characteristic subscription or Bluetooth musical data capture was performed. [MIDI Association BLE-MIDI specification](https://midi.org/midi-over-bluetooth-low-energy-ble-midi)
 
 During a 15-second comparison with the instrument powered off and USB unplugged, the same watcher received 41 advertisements and found zero matches. This supports attribution of the matching advertiser to the instrument.
+
+A 15-second scan after the operator powered the instrument back on, with the USB cable still unplugged, received 59 advertisements and found one source advertising the MIDI EWI name and BLE-MIDI service. The on/off/on comparison confirms BLE-MIDI advertising from the instrument on battery power.
