@@ -1,4 +1,4 @@
-param([ValidateRange(1, 120)][int]$Seconds = 15)
+param([ValidateRange(1, 120)][int]$Seconds = 15, [switch]$Gatt)
 
 $ErrorActionPreference = 'Stop'
 $metadata = Join-Path $env:windir 'System32\WinMetadata'
@@ -7,15 +7,47 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
+using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Advertisement;
+using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Foundation;
 
 public static class EwiBle {
     public static void Main(string[] args) {
-        foreach (string line in Scan(Int32.Parse(args[0]))) Console.WriteLine(line);
+        Scan(Int32.Parse(args[0]), args.Length > 1);
     }
 
-    private static string[] Scan(int seconds) {
+    private static T Await<T>(IAsyncOperation<T> operation, string label) {
+        var timeout = System.Diagnostics.Stopwatch.StartNew();
+        while (operation.Status == AsyncStatus.Started && timeout.ElapsedMilliseconds < 12000)
+            Thread.Sleep(50);
+        if (operation.Status == AsyncStatus.Started) {
+            operation.Cancel();
+            throw new TimeoutException(label);
+        }
+        return operation.GetResults();
+    }
+
+    private static void Discover(ulong address) {
+        using (var device = Await(BluetoothLEDevice.FromBluetoothAddressAsync(address), "open BLE device")) {
+            if (device == null) { Console.WriteLine("BLE device unavailable."); return; }
+            var services = Await(device.GetGattServicesAsync(BluetoothCacheMode.Uncached), "discover services");
+            Console.WriteLine("GATT discovery: " + services.Status);
+            if (services.Status != GattCommunicationStatus.Success) return;
+            foreach (var service in services.Services) {
+                using (service) {
+                    var chars = Await(service.GetCharacteristicsAsync(BluetoothCacheMode.Uncached), "discover characteristics");
+                    Console.WriteLine("service " + service.Uuid + " characteristics=" + chars.Status);
+                    if (chars.Status != GattCommunicationStatus.Success) continue;
+                    foreach (var characteristic in chars.Characteristics) {
+                        Console.WriteLine("  characteristic " + characteristic.Uuid + " " + characteristic.CharacteristicProperties);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void Scan(int seconds, bool gatt) {
         var watcher = new BluetoothLEAdvertisementWatcher();
         watcher.ScanningMode = BluetoothLEScanningMode.Active;
         var matched = new ConcurrentDictionary<ulong, int>();
@@ -44,11 +76,22 @@ public static class EwiBle {
                 return String.Format("{0} source(s): {1}; BLE-MIDI UUID advertised: {2}",
                                      group.Count(), label, (flags & 4) != 0);
             });
-            return new[] { "Watcher status: " + watcher.Status, "Advertisements seen: " + received,
-                           "Matching sources: " + matched.Count }.Concat(summary).ToArray();
+            Console.WriteLine("Watcher status: " + watcher.Status);
+            Console.WriteLine("Advertisements seen: " + received);
+            Console.WriteLine("Matching sources: " + matched.Count);
+            foreach (string item in summary) Console.WriteLine(item);
         } finally {
             watcher.Stop();
             receivedEvent.GetRemoveMethod().Invoke(watcher, new object[] { token });
+        }
+        if (gatt) {
+            var targets = matched.Where(entry => (entry.Value & 5) == 5).Select(entry => entry.Key).ToArray();
+            if (targets.Length != 1) {
+                Console.WriteLine("GATT skipped: expected one source with both exact MIDI EWI name and BLE-MIDI UUID.");
+                return;
+            }
+            try { Discover(targets[0]); }
+            catch (Exception error) { Console.WriteLine("GATT failed: " + error.GetType().Name + "."); }
         }
     }
 }
@@ -62,7 +105,7 @@ try {
     [IO.File]::WriteAllText($code, $source)
     & (Join-Path $runtime 'csc.exe') /nologo "/out:$exe" "/r:$metadata\Windows.Devices.winmd" "/r:$metadata\Windows.Foundation.winmd" "/r:$runtime\System.Runtime.WindowsRuntime.dll" "/r:$runtime\System.Runtime.dll" "/r:$runtime\System.Runtime.InteropServices.WindowsRuntime.dll" $code
     if ($LASTEXITCODE -ne 0) { throw 'BLE scanner failed to compile.' }
-    & $exe $Seconds
+    if ($Gatt) { & $exe $Seconds gatt } else { & $exe $Seconds }
     if ($LASTEXITCODE -ne 0) { throw 'BLE scanner failed.' }
 } finally {
     [IO.Directory]::Delete($work, $true)
