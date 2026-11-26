@@ -24,3 +24,5 @@ The Vangoa video donor has the exact DC02 Pro touch PCB and a 48-lead main IC. P
 The Vangoa U6 silkscreen and package dot establish a pin-numbering reference. The clock branch and USB breakout constrain future tracing, with no verified signal endpoints on U6. The original DC02 sound comparison found that harmonic resemblance to public SAM2695 recordings could not identify the silicon. [Topology notes](../experiments/2026-11-26-mainboard-topology.md) · [Acoustic screen](../experiments/2026-11-26-acoustic-fingerprint-screen.md)
 
 Chinese trademark and patent records identify a Shenzhen electronic-instrument developer using the KALEZO brand. Its specific relationship to the instrument remains unverified. [OEM supply-chain research](../experiments/2026-11-26-chinese-oem-supply-chain.md)
+
+A KUYIN seller mentions a Kalezo companion app. Public catalog and archive checks have not identified its package or established a shared platform or new DC02 protocol. [App and platform investigation](../experiments/2026-11-26-kalezo-software-provenance.md)
