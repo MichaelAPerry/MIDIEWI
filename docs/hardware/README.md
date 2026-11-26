@@ -32,6 +32,8 @@ The full Windows host report stays local. The fields above were selected from th
 
 WindySynth’s 2023 Vangoa specimen carries the exact photographed Pro touch-board revision, with `GND/SDA/SCL/VDD` pads at CON1. Its main PCB reads `DC?_MAIN_V1.1_20221115` and carries a 48-lead U6 and 3PEAK LMV324B quad op-amp. A small reverse-side RF package, 24 MHz crystal and antenna resemble the layout in the Konix ED01 drum kit exhibit. The original and Pro donors share the broad board and connector arrangement. Mainboard equivalence, the RF part number and the instruments’ exact processors remain unresolved. The notebook includes the donor opening sequence and both PCB faces. [Video and FCC comparison](../experiments/2026-11-26-vangoa-video-and-konix-fcc.md)
 
+The donor has a probable 7 mm-class, 0.50 mm pitch U6 footprint and a roughly 12 MHz clock candidate. Its connection to the USB data pair and the analog section remains unresolved. [Pin orientation and partial net map](../experiments/2026-11-26-mainboard-topology.md) · [Processor candidate database](processor-candidates.md)
+
 ## Board photographs
 
 1. Photograph the exterior, case seam, ports and any model text. Crop serial or QR labels before sharing. Power off and unplug USB before opening. Remove visible case screws with the matching driver and use a plastic pick at the seam. Lift the cover slowly because the speaker, battery, or breath tube may be attached. Stop if the case resists or the battery is glued over the area.

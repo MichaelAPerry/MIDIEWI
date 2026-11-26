@@ -8,6 +8,9 @@
 - [x] Compare published DC02 and DC02 Pro teardown photos and transcribe their touch PCB revisions.
 - [x] Identify the Pro touch board in the Vangoa teardown and compare mainboard and radio layout with Konix FCC exhibits.
 - [ ] Match the tested original-style DC02 to a board revision and compare other OEM variants against the USB fingerprint.
+- [x] Map visible donor traces and compare package and pinout predictions across processor vendors.
+- [x] Screen existing EWI line captures against public embedded-synth recordings and document the limits.
+- [ ] Resolve USB D+/D− and both clock endpoints on the revision-matched mainboard.
 - [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
 - [x] Compare public Dream USB reference templates and analyze firmware containers offline.
 - [x] Test ordinary USB MIDI playback and the MIDI Universal Identity Request.
