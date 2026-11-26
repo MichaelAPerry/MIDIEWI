@@ -6,6 +6,7 @@
 - [x] Attribute BLE-MIDI advertisements using an on/off/on comparison.
 - [ ] Capture Bluetooth performance messages and run segmented takes for fingering, articulation and physical latency.
 - [x] Compare published DC02 and DC02 Pro teardown photos and transcribe their touch PCB revisions.
+- [x] Identify the Pro touch board in the Vangoa teardown and compare mainboard and radio layout with Konix FCC exhibits.
 - [ ] Match the tested original-style DC02 to a board revision and compare other OEM variants against the USB fingerprint.
 - [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
 - [x] Compare public Dream USB reference templates and analyze firmware containers offline.

@@ -18,3 +18,5 @@ See the [BLE advertising experiment](../experiments/2026-11-26-ble-advertising.m
 See the [USB receive experiment](../experiments/2026-11-26-usb-midi-output.md) and the [Dream reference comparison](../experiments/2026-11-26-dream-reference-files.md).
 
 The stock-donor photo comparison confirms distinct original DC02 and DC02 Pro touch PCB identifiers. The tested sample's installed board revision and chips remain unidentified. [Photo inspection](../experiments/2026-11-26-dc02-teardown-photo-review.md)
+
+The Vangoa video donor has the exact DC02 Pro touch PCB and a 48-lead main IC. Package evidence excludes SAM5504B and SAM2695 for that position on this donor. The four labeled touch-board pads indicate an I²C peripheral connection. The original DC02 mainboard match and firmware access remain unverified. [Video and FCC comparison](../experiments/2026-11-26-vangoa-video-and-konix-fcc.md)

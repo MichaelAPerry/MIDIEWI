@@ -28,6 +28,10 @@ The full Windows host report stays local. The fields above were selected from th
 - **Vangoa EWI-100 and OYAYO DC02B.** Mirrored model manuals document MIDI features and provide useful control-layout comparisons. PCB and USB evidence for equivalence remains open. Vangoa's current download page also lists a differently named MAE-02. [Vangoa EWI-100 manual mirror](https://manuals.plus/asin/B0C1GC5K5Y.pdf) · [Vangoa downloads](https://www.vangoa.com/pages/download) · [OYAYO DC02B manual mirror](https://manuals.plus/asin/B0CLRMC3WR)
 - **Kalezo.** The USB manufacturer string is verified. Searches for Kalezo with the PID, electronic wind instruments, and Chinese-language searches for DC02 teardown/chip/firmware (`拆机 芯片 固件`) did not yield a revision-matched board photo, manufacturer attribution, or device-specific updater. Ask future contributors for this fingerprint and board evidence when comparing units.
 
+## Vangoa and Konix donor boards
+
+WindySynth’s 2023 Vangoa specimen carries the exact photographed Pro touch-board revision, with `GND/SDA/SCL/VDD` pads at CON1. Its main PCB reads `DC?_MAIN_V1.1_20221115` and carries a 48-lead U6 and 3PEAK LMV324B quad op-amp. A small reverse-side RF package, 24 MHz crystal and antenna resemble the layout in the Konix ED01 drum kit exhibit. The original and Pro donors share the broad board and connector arrangement. Mainboard equivalence, the RF part number and the instruments’ exact processors remain unresolved. The notebook includes the donor opening sequence and both PCB faces. [Video and FCC comparison](../experiments/2026-11-26-vangoa-video-and-konix-fcc.md)
+
 ## Board photographs
 
 1. Photograph the exterior, case seam, ports and any model text. Crop serial or QR labels before sharing. Power off and unplug USB before opening. Remove visible case screws with the matching driver and use a plastic pick at the seam. Lift the cover slowly because the speaker, battery, or breath tube may be attached. Stop if the case resists or the battery is glued over the area.
