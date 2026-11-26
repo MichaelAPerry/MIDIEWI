@@ -9,5 +9,6 @@
 - [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
 - [x] Compare public Dream USB reference templates and analyze firmware containers offline.
 - [x] Test ordinary USB MIDI playback and the MIDI Universal Identity Request.
-- [ ] Map external controller effects, timbres, bank aliases and polyphony with isolated audio takes.
+- [x] Measure external controls, default-bank programs, two alternate bank selections and a 12-note polyphony lower bound.
+- [ ] Compare physical presets with external programs and test independent MIDI-channel timbres and the voice limit.
 - [ ] Obtain attributable firmware identification or a supported read-only protocol for this hardware revision.

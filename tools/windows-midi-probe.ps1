@@ -1,8 +1,10 @@
 param(
-    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','Suite')][string]$Mode = 'List',
+    [ValidateSet('List','Identity','Notes','Controls','Programs','Tones','ToneRange','Catalog','Polyphony','Suite')][string]$Mode = 'List',
     [ValidateRange(-1, 65535)][int]$OutputIndex = -1,
     [ValidateRange(-1, 65535)][int]$InputIndex = -1,
-    [switch]$DryRun
+    [switch]$DryRun,
+    [switch]$Timestamp,
+    [ValidateRange(1, 100)][int]$PolyphonyLevel = 32
 )
 
 $ErrorActionPreference = 'Stop'
@@ -167,7 +169,11 @@ if (!$DryRun) {
 }
 
 function Send-Short([int]$status, [int]$first, [int]$second = 0) {
-    '  {0:X2} {1:X2} {2:X2}' -f $status, $first, $second
+    if ($Timestamp) {
+        '{0} {1:X2} {2:X2} {3:X2}' -f [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(), $status, $first, $second
+    } else {
+        '  {0:X2} {1:X2} {2:X2}' -f $status, $first, $second
+    }
     if (!$DryRun) { [MidiProbe]::Short($handle, $status, $first, $second) }
 }
 
@@ -229,6 +235,46 @@ try {
         Pause 850
         Send-Short 0xb0 64 0
     }
+    if ($Mode -eq 'Polyphony') {
+        Step 'Polyphony: hold chromatic C4 through B4 together'
+        Send-Short 0xb0 7 $PolyphonyLevel
+        foreach ($n in 60..71) { Send-Short 0x90 $n 90; Pause 240 }
+        Pause 1200
+        foreach ($n in 71..60) { Send-Short 0x80 $n 0; Pause 120 }
+    }
+    if ($Mode -eq 'Catalog') {
+        Send-Short 0xb0 7 76
+        foreach ($bank in @(@(0,0), @(0,1), @(1,0))) {
+            Send-Short 0xb0 0 $bank[0]
+            Send-Short 0xb0 32 $bank[1]
+            $lastProgram = if ($bank[0] -eq 0 -and $bank[1] -eq 0) { 127 } else { 9 }
+            foreach ($program in 0..$lastProgram) {
+                "Bank $($bank[0])/$($bank[1]) program $program"
+                Send-Short 0xc0 $program
+                Send-Short 0x90 60 90
+                Pause 220
+                Send-Short 0x80 60 0
+                Pause 130
+            }
+        }
+    }
+    if ($Mode -eq 'ToneRange') {
+        Send-Short 0xb0 0 0
+        Send-Short 0xb0 32 0
+        foreach ($program in 0..16) {
+            Step "Program $program, bank 0/0, channel 1"
+            Send-Short 0xc0 $program
+            Note 60 500
+        }
+        Send-Short 0xc0 0
+        foreach ($channel in 2,3,10,16) {
+            Step "Channel ${channel}, C4"
+            Send-Short (0x90 + $channel - 1) 60 90
+            Pause 500
+            Send-Short (0x80 + $channel - 1) 60 0
+            Pause 180
+        }
+    }
     if ($Mode -eq 'Tones') {
         Send-Short 0xb0 0 0
         Send-Short 0xb0 32 0
@@ -269,6 +315,19 @@ try {
                 [MidiProbe]::Short($handle, 0xb0, 64, 0)
                 [MidiProbe]::Short($handle, 0xe0, 0, 64)
                 foreach ($n in 60,64,67) { [MidiProbe]::Short($handle, 0x80, $n, 0) }
+                if ($Mode -eq 'Catalog') {
+                    [MidiProbe]::Short($handle, 0xb0, 0, 0)
+                    [MidiProbe]::Short($handle, 0xb0, 32, 0)
+                    [MidiProbe]::Short($handle, 0xc0, 0, 0)
+                    [MidiProbe]::Short($handle, 0xb0, 7, 100)
+                }
+                if ($Mode -eq 'Polyphony') {
+                    foreach ($n in 60..71) { [MidiProbe]::Short($handle, 0x80, $n, 0) }
+                    [MidiProbe]::Short($handle, 0xb0, 7, 100)
+                }
+                if ($Mode -eq 'ToneRange') {
+                    foreach ($ch in 2,3,10,16) { [MidiProbe]::Short($handle, (0x80 + $ch - 1), 60, 0) }
+                }
                 if ($Mode -eq 'Tones') {
                     foreach ($n in 36,38,42) { [MidiProbe]::Short($handle, 0x89, $n, 0) }
                 }

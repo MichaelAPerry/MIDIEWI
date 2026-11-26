@@ -45,6 +45,8 @@ A headless Windows Edge run of the lab's synthetic demo finished with five captu
 
 ## USB MIDI output and offline image inspection
 
-In Windows PowerShell 5.1, run `.\tools\windows-midi-probe.ps1` to list ports. Select the external USB MIDI port by index. `-Mode Suite -DryRun` prints the full fixed sequence without opening a MIDI device. Live modes include `Identity`, `Notes`, `Controls`, `Programs`, `Tones`, and `Suite`. Use the instrument speaker or headphones at a comfortable level. `Identity` and `Suite` require both `-InputIndex` and `-OutputIndex` of the same device.
+In Windows PowerShell 5.1, run `.\tools\windows-midi-probe.ps1` to list ports. Select the external USB MIDI port by index. `-Mode Suite -DryRun` prints the full fixed sequence without opening a MIDI device. Live modes include `Identity`, `Notes`, `Controls`, `Programs`, `Tones`, `ToneRange`, `Catalog`, `Polyphony`, and `Suite`. Use the instrument speaker or headphones at a comfortable level. `Identity` and `Suite` require both `-InputIndex` and `-OutputIndex` of the same device.
 
 Run `python3 tools/dream-image-info.py PATH` against a local vendor reference image or synthetic fixture. The tool identifies observed SAM2DFU metadata, checks DFU suffix CRC, and recognizes possible Dream raw-image markers. CRC covers accidental corruption. Authenticity and compatibility require independent evidence.
+
+For line recordings, the probe's `-Timestamp` option emits Unix millisecond send markers on short messages. Capture the interface input in a separate process and align the event offsets to the first audible onset. With NumPy installed, run `python3 tools/audio-window.py captures/ewi.wav --start 11.74 --duration 0.2 --channel 1 --midi-notes 60 61` to report level, clip count and spectral peaks. Use isolated recording windows when comparing effects.

@@ -4,7 +4,8 @@
 | --- | --- |
 | Windows USB | Verified VID:PID `2485:4330`, release `0100`, manufacturer string Kalezo, USB-MIDI 1.0 |
 | USB MIDI input | Verified on Windows WinMM. Channel 1, CC7 expression, fixed velocity 120 in the sampled performance |
-| USB MIDI output | External channel 1 notes heard from the instrument speaker. Identity Request timed out twice. |
+| USB MIDI output | Verified external notes, at least 12 simultaneous voices, pitch bend, CC7, CC11, and sustain. CC2 showed no level response in the tested patch. Identity Request timed out. |
+| External programs | Programs 0–9 sounded on bank 0/0. No additional voices in the bank 0/0 sweep or the two alternate bank comparisons. |
 | Linux/WSL USB | No USB device nodes in the tested WSL session |
 | Bluetooth LE | Verified MIDI EWI service advertisements in an on/off/on comparison, including battery power. Message delivery remains untested |
 | PCB, firmware, recovery | Unidentified |
