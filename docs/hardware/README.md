@@ -1,5 +1,7 @@
 # Hardware and compatibility
 
+The tested sample is operator-identified as the original-style Konix DC02. Published donor photographs show `DC02_TOUCH_V1.1_20220816` for one original DC02 and `DC02 Pro_METAL_TOUCH_V1.2_20230113` for a Pro. These are touch PCB identifiers. The tested sample is still closed and its installed PCB revision is unverified. [Photo inspection](../experiments/2026-11-26-dc02-teardown-photo-review.md)
+
 ## Verified USB fingerprint
 
 | Field | Windows USB Device Tree Viewer observation |
@@ -22,7 +24,7 @@ The full Windows host report stays local. The fields above were selected from th
 
 ## Candidate relatives
 
-- **Konix DC02 Pro.** Konix sells the DC02 Pro and describes Bluetooth MIDI and Bluetooth audio. Its manual says USB MIDI is available, describes optional Bluetooth variants, and uses the BLE name MIDI EWI for relevant variants. The Chinese Konix site offers ODM/OEM supply and lists the DC02, with a Chinese manual. The branding overlaps, but the documentation provides no USB identity or PCB revision for direct comparison. [DC02 Pro product](https://www.konixtech.com/electronic-wind-instrument-konix-dc02-pro-mini-electronic-saxophone-product/) · [DC02 Pro manual](https://file.globalso.com/file_manage/812/20240607/dc02-pro-instructions.pdf) · [科汇兴 DC02](https://www.konixtech.cn/product-detail/BGpOvZGN) · [中文说明书](https://www.konixtech.cn/resources/upload/a9358a00faa236b/t/1721121571353/DC02%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf)
+- **Konix DC02 Pro.** A related variant with a distinct photographed touch PCB. Konix sells the DC02 Pro and describes Bluetooth MIDI and Bluetooth audio. Its manual says USB MIDI is available, describes optional Bluetooth variants, and uses the BLE name MIDI EWI for relevant variants. The Chinese Konix site offers ODM/OEM supply and lists the DC02, with a Chinese manual. The branding overlaps, but the documentation provides no USB identity or PCB revision for direct comparison. [DC02 Pro product](https://www.konixtech.com/electronic-wind-instrument-konix-dc02-pro-mini-electronic-saxophone-product/) · [DC02 Pro manual](https://file.globalso.com/file_manage/812/20240607/dc02-pro-instructions.pdf) · [科汇兴 DC02](https://www.konixtech.cn/product-detail/BGpOvZGN) · [中文说明书](https://www.konixtech.cn/resources/upload/a9358a00faa236b/t/1721121571353/DC02%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf)
 - **Vangoa EWI-100 and OYAYO DC02B.** Mirrored model manuals document MIDI features and provide useful control-layout comparisons. PCB and USB evidence for equivalence remains open. Vangoa's current download page also lists a differently named MAE-02. [Vangoa EWI-100 manual mirror](https://manuals.plus/asin/B0C1GC5K5Y.pdf) · [Vangoa downloads](https://www.vangoa.com/pages/download) · [OYAYO DC02B manual mirror](https://manuals.plus/asin/B0CLRMC3WR)
 - **Kalezo.** The USB manufacturer string is verified. Searches for Kalezo with the PID, electronic wind instruments, and Chinese-language searches for DC02 teardown/chip/firmware (`拆机 芯片 固件`) did not yield a revision-matched board photo, manufacturer attribution, or device-specific updater. Ask future contributors for this fingerprint and board evidence when comparing units.
 

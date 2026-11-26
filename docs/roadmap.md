@@ -5,7 +5,8 @@
 - [x] Prototype host-side capture, breath shaping and microtonal harmony.
 - [x] Attribute BLE-MIDI advertisements using an on/off/on comparison.
 - [ ] Capture Bluetooth performance messages and run segmented takes for fingering, articulation and physical latency.
-- [ ] Verify OEM candidates against VID:PID, manufacturer string and board photographs.
+- [x] Compare published DC02 and DC02 Pro teardown photos and transcribe their touch PCB revisions.
+- [ ] Match the tested original-style DC02 to a board revision and compare other OEM variants against the USB fingerprint.
 - [ ] Identify the USB, sensor, synthesis and radio signal paths. Establish a factory recovery path before onboard development.
 - [x] Compare public Dream USB reference templates and analyze firmware containers offline.
 - [x] Test ordinary USB MIDI playback and the MIDI Universal Identity Request.
