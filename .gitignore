@@ -1,0 +1,15 @@
+/.agents/
+/.aws/
+/.codex/
+.env
+.env.*
+/captures/
+/private/
+__pycache__/
+.venv/
+*.bin
+*.hex
+*.elf
+*.uf2
+*.pcap
+*.pcapng
